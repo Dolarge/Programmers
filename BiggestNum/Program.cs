@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace BiggestNum
@@ -7,7 +8,7 @@ namespace BiggestNum
     {
         static void Main(string[] args)
         {
-            int[] test = {10,12,231};
+            int[] test = { 10, 12, 231 };
             Solution solution = new Solution();
             solution.Function(test);
 
@@ -55,7 +56,20 @@ namespace BiggestNum
 
             return answer;
         }
+    //더 좋은 
+        public string solution1(int[] numbers)
+        {
+            Array.Sort(numbers, (x, y) =>
+            {
+                string XY = x.ToString() + y.ToString();
+                string YX = y.ToString() + x.ToString();
+                return YX.CompareTo(XY);
+            });
+            if (numbers.Where(x => x == 0).Count() == numbers.Length) return "0";
+            else return string.Join("", numbers);
+        }
     }
+
 
 }
 
