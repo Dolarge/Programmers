@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BiggestNum.Sort
 {
@@ -7,28 +8,21 @@ namespace BiggestNum.Sort
         public int[] solution(int[] array, int[,] commands)
         {
             int[] answer = new int[commands.GetLength(0)];
-            //array에 값이 들어오고
-
-            //commands
-            //[2,6,3] 2번째부터 6번째까지 뽑아내고 , 정렬해서 3번째
-            //
-
-            List<int> list = new List<int>();
+ 
+            List<int> listArray = new List<int>(array);
 
             for (int i = 0; i < commands.GetLength(0); i++)
             {
-                if (list.Count > 0)
-                    list.Clear();
 
-                for (int j = commands[i,0]; j <= commands[i, 1]; j++)
-                {
-                    list.Add(array[j-1]);
-                }
 
-                list.Sort();
-                answer[i] = list[ commands[i, 2] -1 ];
-
+                int nStart = commands[i, 0];
+                int nEnd = commands[i, 1];
+                int nIndex = commands[i, 2];
+                List<int> list = listArray.Where((x, idx) => idx >= nStart -1 && idx<nEnd).OrderBy(x=>x).ToList();
+                answer[i] = list[nIndex - 1];
             }
+
+
 
 
 
