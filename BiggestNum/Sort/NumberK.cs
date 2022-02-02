@@ -13,20 +13,14 @@ namespace BiggestNum.Sort
 
             for (int i = 0; i < commands.GetLength(0); i++)
             {
-
-
                 int nStart = commands[i, 0];
                 int nEnd = commands[i, 1];
                 int nIndex = commands[i, 2];
                 List<int> list = listArray.Where((x, idx) => idx >= nStart -1 && idx<nEnd).OrderBy(x=>x).ToList();
                 answer[i] = list[nIndex - 1];
             }
-
-
-
-
-
             return answer;
+        
         }
     }
 }

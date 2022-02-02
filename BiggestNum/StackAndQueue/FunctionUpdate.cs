@@ -25,46 +25,20 @@ namespace BiggestNum.StackAndQueue
         //95 90 99 99 80 99         1,1,1,1,1       1,3,2
         public int[] solution(int[] progresses, int[] speeds)
         {
-            List<int> answer = new List<int>();
-
-            Queue<int> Que_progresses = new Queue<int>(progresses);
-            Queue<int> Que_speeds = new Queue<int>(speeds);
-
-            int total_job =0;
-
-            while (Que_progresses.Count>0)
+            List<int> iList = new List<int>();
+            while (true)
             {
-                for (int i = 0; i < Que_progresses.Count; i++)
-                {
-                    //현재 작업
-                    int tmp_progress = Que_progresses.Dequeue();
+                int count = 0;
+                for (int i = iList.Sum(); i < progresses.Length; i++) progresses[i] += speeds[i];
 
-                    //작업진도 계산
-                    tmp_progress += Que_speeds.ElementAt(i);
+                if (progresses[iList.Sum()] >= 100)
+                    for (int i = iList.Sum(); i < progresses.Length; i++)
+                        if (progresses[i] >= 100) count++; else break;
 
-                    Que_progresses.Enqueue(tmp_progress);
-                }
-                if (Que_progresses.Count>0)
-                {
-                    //작업이 완료가되면
-                    while (Que_progresses.Peek() >= 100)
-                    {
-                        Que_progresses.Dequeue();
-                        total_job++;
-                        //모든 개발이 끝나면 종료
-                        if (Que_progresses.Count == 0)
-                            break;
-                    }
-
-                    if (total_job >0)
-                    {
-                        answer.Add(total_job);
-                        total_job = 0;
-                    }
-                }
+                if (count != 0) iList.Add(count);
+                if (iList.Sum() == progresses.Length) break;
             }
-            
-            return answer.ToArray();
+            return iList.ToArray();
 
         }
     }
