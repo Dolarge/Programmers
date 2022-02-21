@@ -8,12 +8,14 @@ namespace BiggestNum
     {
         static void Main(string[] args)
         {
-            int[] test = { 1,2,3,4,5};
+            int[] testc = { 1, 5, 2, 6, 3, 7, 4 };
+            int[,] command = new int[3, 3] { { 2, 5, 3 }, { 4, 4, 1 }, { 1, 7, 3 }};
+            
             //Solution solution = new Solution();
             //solution.Function(test);
-            Search.LV1Search lV1Search = new Search.LV1Search();
-            lV1Search.solution(test);
-
+           Sort.Solution solution = new Sort.Solution();
+            
+            solution.solution(testc, command);
 
         }
     }
